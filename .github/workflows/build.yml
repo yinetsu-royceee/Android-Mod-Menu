@@ -23,8 +23,13 @@ jobs:
         cd app/src/main/jni
         $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=Android.mk NDK_APPLICATION_MK=Application.mk
 
+    - name: Find .so files
+      run: |
+        echo "Searching for .so files:"
+        find app/src/main -name "*.so"
+
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: libmodmenu
-        path: app/src/main/jniLibs/arm64-v8a/libmodmenu.so
+        path: "**/*.so"
